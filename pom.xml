@@ -6,7 +6,7 @@
     <artifactId>pepnovo-jwrapper</artifactId>
     <packaging>jar</packaging>
     <version>${version.number}</version>
-    <name>pepnovo-jwrapper</name>
+    <name>jwrapper-pepnovo</name>
     <url>code.google.com/p/pepnovo-jwrapper/</url>
     <!-- Set the version number for the whole project -->
     <properties>
