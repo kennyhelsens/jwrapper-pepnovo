@@ -1,10 +1,12 @@
 package com.compomics.pepnovo.config;
 
 import com.google.common.io.Files;
+import com.google.common.io.Resources;
 import org.apache.commons.configuration.PropertiesConfiguration;
 import org.apache.log4j.Logger;
 
 import java.io.File;
+import java.net.URL;
 
 /**
  * This class is a
@@ -17,14 +19,13 @@ public class PepnovoConfiguration {
 // -------------------------- STATIC METHODS --------------------------
 
 
-
     public static File getExecutable() {
         String lPath = getPepnovoFolder();
 
         String lExecutable;
-        if(Utilities.isUnix()){
+        if (Utilities.isUnix()) {
             lExecutable = config.getString("pepnovo.executable.unix");
-        }else{
+        } else {
             lExecutable = config.getString("pepnovo.executable.windows");
         }
 
@@ -36,15 +37,14 @@ public class PepnovoConfiguration {
     }
 
     public static int getNumberOfTopRankIons() {
-        return new Integer(config.getString("toprank.count"));
+        return config.getInt("toprank.count");
     }
 
     /**
-     *
      * @return
      */
-    public static File getWorkSpace(){
-        if(iWorkSpace == null){
+    public static File getWorkSpace() {
+        if (iWorkSpace == null) {
             iWorkSpace = Files.createTempDir();
         }
         return iWorkSpace;
@@ -52,7 +52,8 @@ public class PepnovoConfiguration {
 
     static {
         try {
-            config = new PropertiesConfiguration("config/pepnovo-jwrapper.properties");
+            URL lResource = Resources.getResource("config/pepnovo-jwrapper.properties");
+            config = new PropertiesConfiguration(lResource);
         } catch (org.apache.commons.configuration.ConfigurationException e) {
             logger.error(e.getMessage(), e);
         }

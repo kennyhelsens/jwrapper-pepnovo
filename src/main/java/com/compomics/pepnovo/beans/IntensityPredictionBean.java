@@ -62,4 +62,6 @@ public class IntensityPredictionBean {
     public void setCharge(int aCharge) {
         iCharge = aCharge;
     }
+
+
 }

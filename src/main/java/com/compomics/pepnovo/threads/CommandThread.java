@@ -8,6 +8,7 @@ import java.io.*;
 import java.nio.charset.Charset;
 import java.sql.Date;
 import java.text.SimpleDateFormat;
+import java.util.Arrays;
 import java.util.Map;
 
 public class CommandThread extends Thread {
@@ -62,7 +63,8 @@ public class CommandThread extends Thread {
             pb = pb.command(iCommand);
             pb = pb.redirectErrorStream(true);
 
-            logger.debug("Executing command '" + iCommand + "'");
+            logger.debug("Executing command '" + Arrays.toString(iCommand) + "'");
+
             Process processus = pb.start();
 
             out = new BufferedReader(new InputStreamReader(processus.getInputStream()));
@@ -77,7 +79,7 @@ public class CommandThread extends Thread {
             iWriter.close();
             processus.destroy();
             long duration = System.currentTimeMillis() - startTime;
-            logger.debug("Finished command " + iCommand + "\tDuration : " + (duration / 1000) + "sec");
+            logger.debug("Finished command " + Arrays.toString(iCommand) + "\tDuration : " + (duration / 1000) + "sec");
         } catch (Exception e) {
             e.printStackTrace();
             logger.error(e.getMessage(), e);
